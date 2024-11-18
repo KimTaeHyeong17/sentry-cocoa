@@ -49,6 +49,16 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (BOOL)isCrashed
+{
+    for (SentryException *exception in self.exceptions) {
+        if (exception.mechanism != nil) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (NSDictionary<NSString *, id> *)serialize
 {
     if (nil == self.timestamp) {
